@@ -6,7 +6,7 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 BOT_TOKEN = "7547766289:AAFNJ1PLTxAgU_skkTcPFtbQLZEzHdwHOHA"
 
 # Your Netlify website URL
-WEB_APP_URL = "https://splendid-douhua-baf02c.netlify.app/" 
+WEB_APP_URL = "https://darling-youtiao-320512.netlify.app/" 
 
 
 # Function to handle the /start command
