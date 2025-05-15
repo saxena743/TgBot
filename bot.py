@@ -3,7 +3,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 # Your bot token
-BOT_TOKEN = "7793247780:AAGT6vAb2aDjmm1vl9Jnyli0V7Fk5k9Ibzk"
+BOT_TOKEN = "7793247780:AAF1CX2lhfosC0NnYAylHuZMZJMY_0ciRdY"
 
 # Your Netlify website URL
 WEB_APP_URL = "https://magical-strudel-8658ed.netlify.app/" 
