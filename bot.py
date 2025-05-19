@@ -1,5 +1,6 @@
 import logging
 import os
+import sys
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, ContextTypes, ApplicationBuilder
 from telegram.error import TelegramError, Conflict
@@ -61,9 +62,9 @@ async def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         logger.error(f"Update {update} caused error: {context.error}", exc_info=True)
 
         if isinstance(context.error, Conflict):
-            logger.error("Conflict error: Multiple bot instances detected. Stopping bot...")
-            await context.application.stop()
-            logger.info("Bot stopped. Please ensure only one instance is running.")
+            logger.error("Conflict error: Multiple bot instances detected. Exiting to prevent further conflicts...")
+            # Instead of stopping the application, exit the process to ensure the container stops
+            sys.exit(1)
 
     except Exception as e:
         logger.error(f"Error in error_handler: {e}", exc_info=True)
