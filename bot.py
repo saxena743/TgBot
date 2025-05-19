@@ -3,10 +3,10 @@ from telegram.ext import Application, CommandHandler, ContextTypes
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 # Your bot token
-BOT_TOKEN = "7793247780:AAF1CX2lhfosC0NnYAylHuZMZJMY_0ciRdY"
+BOT_TOKEN = "7793247780:AAHGFMUp1O-h36VoXyMJaN4LBhToPyONREI"
 
 # Your Netlify website URL
-WEB_APP_URL = "https://magical-strudel-8658ed.netlify.app/" 
+WEB_APP_URL = "https://darling-arithmetic-c95178.netlify.app/" 
 
 
 # Function to handle the /start command
