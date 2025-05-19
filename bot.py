@@ -16,19 +16,39 @@ BOT_TOKEN = os.getenv("BOT_TOKEN", "7793247780:AAHGFMUp1O-h36VoXyMJaN4LBhToPyONR
 WEB_APP_URL = "https://darling-arithmetic-c95178.netlify.app/"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Handle the /start command."""
+    """Handle the /start command in private and group chats."""
     try:
-        user_name = update.message.from_user.first_name  # Get user's first name
+        if not update.message or not update.effective_chat:
+            logger.error("Invalid update: No message or chat found")
+            return
+
+        user_name = update.message.from_user.first_name or "User"  # Get user's first name
+        chat_type = update.effective_chat.type  # Get chat type (private, group, supergroup)
+
         # Create the inline button
         button = InlineKeyboardButton("Click Me To See", web_app={"url": WEB_APP_URL})
         keyboard = InlineKeyboardMarkup([[button]])
 
-        # Send a personalized greeting message with an inline button
+        # Prepare response based on chat type
+        if chat_type == "private":
+            message = (
+                f"Hello {user_name}!\n"
+                "Welcome to FamXExclusive Bot!\n"
+                "Tap the button below to see our offers!"
+            )
+        else:  # Group or supergroup
+            message = (
+                f"Hey {user_name}!\n"
+                "Thanks for starting FamXExclusive Bot in this group!\n"
+                "Tap the button below to check out our offers!"
+            )
+
+        # Send the response
         await update.message.reply_text(
-            f"Hello {user_name}!\nWelcome to FamXExclusive Bot!\nTap the button below to see our offers!",
+            message,
             reply_markup=keyboard
         )
-        logger.info(f"Sent welcome message to chat ID: {update.effective_chat.id}")
+        logger.info(f"Sent welcome message to user {user_name} in chat ID: {update.effective_chat.id} (type: {chat_type})")
 
     except TelegramError as te:
         logger.error(f"Telegram API error in start command: {te}")
