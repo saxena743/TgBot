@@ -2,7 +2,7 @@ import logging
 import os
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
-    Application, CommandHandler, ContextTypes, ApplicationBuilder
+    Application, CommandHandler, ContextTypes
 )
 from telegram.error import TelegramError, Conflict
 
@@ -14,7 +14,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Bot configuration
-BOT_TOKEN = os.getenv("BOT_TOKEN", "7793247780:AAHGFMUp1O-h36VoXyMJaN4LBhToPyONREI")
+BOT_TOKEN = "7793247780:AAHGFMUp1O-h36VoXyMJaN4LBhToPyONREI"
 WEB_APP_URL = "https://darling-arithmetic-c95178.netlify.app/"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -72,11 +72,6 @@ def main():
 
     except Exception as e:
         logger.error(f"Failed to start bot: {e}", exc_info=True)
-        raise
-
-if __name__ == "__main__":
-    main()
-
         raise
 
 if __name__ == "__main__":
