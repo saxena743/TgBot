@@ -49,24 +49,23 @@ async def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         logger.error(f"Error in error_handler: {e}", exc_info=True)
 
 def main():
-    """Run the bot with webhook."""
+    """Run the bot with polling."""
     try:
         bot_token = BOT_TOKEN
         if not bot_token:
             raise ValueError("BOT_TOKEN not set")
 
+        # Create the bot application
         application = Application.builder().token(bot_token).build()
 
+        # Add the /start command handler
         application.add_handler(CommandHandler("start", start))
+        # Add error handler
         application.add_error_handler(error_handler)
 
-        logger.info("Starting bot with webhook...")
-        application.run_webhook(
-            listen="0.0.0.0",
-            port=int(os.getenv("PORT", 8443)),
-            url_path=bot_token,
-            webhook_url=f"https://famx-bot.up.railway.app/{bot_token}"  # Replace with your Railway domain
-        )
+        # Start polling for updates
+        logger.info("Starting bot with polling...")
+        application.run_polling(allowed_updates=Update.ALL_TYPES, drop_pending_updates=True)
 
     except Exception as e:
         logger.error(f"Failed to start bot: {e}", exc_info=True)
