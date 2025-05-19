@@ -65,7 +65,7 @@ def main():
             listen="0.0.0.0",
             port=int(os.getenv("PORT", 8443)),
             url_path=bot_token,
-            webhook_url=f"https://your-railway-app.up.railway.app/{bot_token}"
+            webhook_url=f"https://famx-bot.up.railway.app/{bot_token}"  # Replace with your Railway domain
         )
 
     except Exception as e:
